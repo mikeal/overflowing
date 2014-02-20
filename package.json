@@ -1,6 +1,6 @@
 {
   "name": "overflowing",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "IRC bot that dumps stack overflow questions in to node.js IRC.",
   "main": "index.js",
   "dependencies": {
