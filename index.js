@@ -1,5 +1,6 @@
 var rss = require('stack-overflow-rss')
   , irc = require('irc')
+  , fs = require('fs')
   ;
 
 function _formatter (q) {
@@ -21,10 +22,18 @@ function overlap (arr1, arr2) {
   return false
 }
 
+function jsonload (file) {
+  try {
+    return JSON.parse(fs.readFileSync(file).toString())
+  } catch(e) {
+    return []
+  }
+}
+
 // channelConfigs = {'#node.js': ['node.js'], '#couchdb': ['couchdb']}
 
-function overflowing (server, nick, channelConfigs, interval, formatter) {
-  if (!interval) interval = 1000 * 60 * 10 // 10 minutes
+function overflowing (server, nick, channelConfigs, cache, interval, formatter) {
+  if (!interval) interval = 1000 * 60 * 5 // 5 minutes
   if (!formatter) formatter = _formatter
 
   var client = new irc.Client(server, nick, {channels: Object.keys(channelConfigs)})
@@ -50,9 +59,13 @@ function overflowing (server, nick, channelConfigs, interval, formatter) {
     }
   }, interval)
 
-  var consumer = rss({tags: uniq(values(channelConfigs)).join(', or, ').split(', ') })
+  var consumer = rss(
+    { tags: uniq(values(channelConfigs)).join(', or, ').split(', ')
+    , entries: cache ? jsonload(cache) : undefined
+    })
   consumer.on('new', function(questions) {
     questions.forEach(post)
+    if (cache) fs.writeFileSync(cache, JSON.stringify(questions))
   })
   consumer.update()
 }
