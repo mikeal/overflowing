@@ -1,0 +1,16 @@
+{
+  "name": "overflowing",
+  "version": "0.0.0",
+  "description": "IRC bot that dumps stack overlfow questions in to node.js IRC.",
+  "main": "index.js",
+  "dependencies": {
+    "stack-overflow-rss": "~0.1.0",
+    "irc": "~0.3.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mikeal Rogers <mikeal.rogers@gmail.com>",
+  "license": "ISC"
+}
