@@ -24,7 +24,7 @@ function overlap (arr1, arr2) {
 // channelConfigs = {'#node.js': ['node.js'], '#couchdb': ['couchdb']}
 
 function overflowing (server, nick, channelConfigs, interval, formatter) {
-  if (!interval) interval = 1000 // * 60 * 10 // 10 minutes
+  if (!interval) interval = 1000 * 60 * 10 // 10 minutes
   if (!formatter) formatter = _formatter
 
   var client = new irc.Client(server, nick, {channels: Object.keys(channelConfigs)})
