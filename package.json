@@ -1,10 +1,10 @@
 {
   "name": "overflowing",
   "version": "0.0.0",
-  "description": "IRC bot that dumps stack overlfow questions in to node.js IRC.",
+  "description": "IRC bot that dumps stack overflow questions in to node.js IRC.",
   "main": "index.js",
   "dependencies": {
-    "stack-overflow-rss": "~0.1.0",
+    "stack-overflow-rss": "git://github.com/mikeal/stack-overflow-rss.git#master",
     "irc": "~0.3.6"
   },
   "devDependencies": {},
